@@ -3,6 +3,8 @@ rabbitmq_vhost = node['formatron_sensu']['rabbitmq']['vhost']
 rabbitmq_user = node['formatron_sensu']['rabbitmq']['user']
 rabbitmq_password = node['formatron_sensu']['rabbitmq']['password']
 redis_host = node['formatron_sensu']['redis']['host']
+api_host = node['formatron_sensu']['api']['host']
+api_port = node['formatron_sensu']['api']['port']
 
 include_recipe 'formatron_sensu::_install'
 
@@ -33,6 +35,10 @@ end
 template '/etc/sensu/conf.d/api.json' do
   owner 'sensu'
   group 'sensu'
+  variables(
+    host: api_host,
+    port: api_port
+  )
   notifies :restart, 'service[sensu-api]', :delayed
 end
 

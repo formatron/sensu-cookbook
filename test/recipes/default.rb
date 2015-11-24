@@ -26,6 +26,8 @@ node.override['formatron_sensu']['rabbitmq']['user'] = rabbitmq_user
 node.override['formatron_sensu']['rabbitmq']['password'] = rabbitmq_password
 node.override['formatron_sensu']['redis']['host'] = redis_host
 node.override['formatron_sensu']['client']['subscriptions'] = ['test']
+node.override['formatron_sensu']['api']['host'] = 'localhost'
+node.override['formatron_sensu']['api']['port'] = 4567
 include_recipe 'formatron_sensu::server'
 
 formatron_sensu_check 'memory' do
