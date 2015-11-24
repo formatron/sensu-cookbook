@@ -1,0 +1,7 @@
+name 'test'
+version '0.1.0'
+supports 'ubuntu'
+depends 'formatron_erlang'
+depends 'formatron_rabbitmq'
+depends 'formatron_redis'
+depends 'formatron_sensu'
