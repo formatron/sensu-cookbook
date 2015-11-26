@@ -31,20 +31,24 @@ node.override['formatron_sensu']['api']['port'] = 4567
 include_recipe 'formatron_sensu::server'
 
 formatron_sensu_check 'memory' do
+  type 'metric'
+  output_type 'graphite'
+  auto_tag_host true
   command '/etc/sensu/plugins/check-memory.sh -w 128 -c 64'
   interval 10
   subscribers [
     'test'
   ]
+  handlers [
+    'relay'
+  ]
   notifies :restart, 'service[sensu-server]', :delayed
-  notifies :restart, 'service[sensu-api]', :delayed
 end
 
 formatron_sensu_handler 'default' do
   command 'cat'
   type 'pipe'
   notifies :restart, 'service[sensu-server]', :delayed
-  notifies :restart, 'service[sensu-api]', :delayed
 end
 
 cookbook_file '/etc/sensu/plugins/check-memory.sh' do
