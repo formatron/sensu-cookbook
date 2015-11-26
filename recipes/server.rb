@@ -6,7 +6,7 @@ redis_host = node['formatron_sensu']['redis']['host']
 api_host = node['formatron_sensu']['api']['host']
 api_port = node['formatron_sensu']['api']['port']
 graphite_host = node['formatron_sensu']['graphite']['host']
-graphite_port = node['formatron_sensu']['graphite']['port']
+graphite_carbon_port = node['formatron_sensu']['graphite']['carbon_port']
 wizard_van_commit = node['formatron_sensu']['wizard_van']['commit']
 wizard_van_tarball_checksum = node['formatron_sensu']['wizard_van']['checksum']
 
@@ -68,7 +68,7 @@ end
 template '/etc/sensu/conf.d/relay.json' do
   variables(
     host: graphite_host,
-    port: graphite_port
+    port: graphite_carbon_port
   )
   notifies :restart, 'service[sensu-server]', :delayed
 end

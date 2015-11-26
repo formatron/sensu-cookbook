@@ -16,4 +16,4 @@ default['formatron_sensu']['wizard_van']['commit'] = '541c446a1426659623074c2e53
 default['formatron_sensu']['wizard_van']['checksum'] = '7e7b55278f0e54c5fbdccdd2dbf240ca7b5b81a35060b0361e2098bb3caa34a5'
 
 default['formatron_sensu']['graphite']['host'] = 'localhost'
-default['formatron_sensu']['graphite']['port'] = 8080
+default['formatron_sensu']['graphite']['carbon_port'] = 2003
