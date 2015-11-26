@@ -62,6 +62,7 @@ bash 'install_wizard_van' do
     tar zxf #{wizard_van_tarball} -C $DIR --strip-components=1
     cp -R $DIR/lib/sensu/extensions/* /etc/sensu/extensions
   EOH
+  action :nothing
   notifies :restart, 'service[sensu-server]', :delayed
 end
 
