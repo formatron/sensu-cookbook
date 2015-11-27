@@ -1,5 +1,3 @@
-require 'sensu_bundle_helper'
-
 def whyrun_supported?
   true
 end
