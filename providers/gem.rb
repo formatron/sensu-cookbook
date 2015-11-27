@@ -10,10 +10,10 @@ action :install do
   version = new_resource.version
 
   gem_package 'bundler' do
-    gem_binary BundleHelper::GEM_BINARY
+    gem_binary SensuBundleHelper::GEM_BINARY
   end
 
-  bundle_dir = File.join BundleHelper::BUNDLES_ROOT, name
+  bundle_dir = File.join SensuBundleHelper::BUNDLES_ROOT, name
   directory bundle_dir do
     recursive true
   end
@@ -30,7 +30,7 @@ action :install do
 
   bash "bundle_install_#{name}" do
     code <<-EOH.gsub(/^ {6}/, '')
-      #{BundleHelper::RUBY_BINARY} bundle install
+      #{SensuBundleHelper::RUBY_BINARY} bundle install
     EOH
     cwd bundle_dir
     action :nothing
