@@ -30,6 +30,7 @@ action :install do
 
   bash "bundle_install_#{name}" do
     code <<-EOH.gsub(/^ {6}/, '')
+      rm Gemfile.lock
       #{Sensu::BundleHelper::BUNDLE_BINARY} install --deployment
     EOH
     cwd bundle_dir
