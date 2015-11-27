@@ -18,7 +18,7 @@ action :install do
     recursive true
   end
 
-  gem_file = File.join bundle_dir, 'Gemfile'
+  gem_file = ::File.join bundle_dir, 'Gemfile'
   template gem_file do
     cookbook 'formatron_sensu'
     variables(
