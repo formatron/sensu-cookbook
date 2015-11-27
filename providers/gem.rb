@@ -13,7 +13,7 @@ action :install do
     gem_binary Sensu::BundleHelper::GEM_BINARY
   end
 
-  bundle_dir = File.join Sensu::BundleHelper::BUNDLES_ROOT, name
+  bundle_dir = ::File.join Sensu::BundleHelper::BUNDLES_ROOT, name
   directory bundle_dir do
     recursive true
   end
