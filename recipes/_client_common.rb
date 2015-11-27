@@ -21,14 +21,8 @@ end
 # install gems required for the client subscriptions
 checks = node['formatron_sensu']['checks'].values
 checks.select! do |check|
-  log 'subscribers' do
-    message check['subscribers']
-  end
-  log 'subscriptions' do
-    message client_subscriptions
-  end
   !(check['gem'].nil?) &&
-  !((check['subscribers'] & client_subscriptions).empty?)
+  !((check['attributes']['subscribers'] & client_subscriptions).empty?)
 end
 required_gems = checks.collect { |check| check['gem'] }
 required_gems.uniq!
