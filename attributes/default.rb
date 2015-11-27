@@ -17,3 +17,33 @@ default['formatron_sensu']['wizard_van']['checksum'] = '7e7b55278f0e54c5fbdccdd2
 
 default['formatron_sensu']['graphite']['host'] = 'localhost'
 default['formatron_sensu']['graphite']['carbon_port'] = 2003
+
+# checks should be a hash of checks to configure on the server
+#
+# eg:
+#
+# {
+#   my_check: {
+#     gem: 'my_gem',
+#     attributes: {
+#       command: 'my_gem.rb'
+#       ...
+#     }
+#   },
+#   ...
+# }
+#
+default['formatron_sensu']['checks'] = {}
+
+# gems should be a hash of gems to install on clients
+#
+# eg: 
+#
+# {
+#   my_gem: {
+#     gem: 'my_gem',
+#     version: '0.0.0'
+#   },
+#   ...
+# }
+default['formatron_sensu']['gems'] = {}

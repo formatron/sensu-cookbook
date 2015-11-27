@@ -17,3 +17,17 @@ service 'sensu-client' do
   supports status: true, restart: true, reload: false
   action [ :enable, :start ]
 end
+
+# install gems required for the client subscriptions
+checks = node['formatron_sensu']['checks'].values
+checks.select! { |check| !check['gem'].nil? && !(check['subscribers'] & client_subscriptions).empty? }
+required_gems = checks.collect { |check| check['gem'] }
+required_gems.uniq!
+gems = node['formatron_sensu']['gems']
+required_gems.each do |gem|
+  params = gems[gem]
+  formatron_sensu_gem gem do
+    gem params['gem'] || gem
+    version params['version']
+  end
+end

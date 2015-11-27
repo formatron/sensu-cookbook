@@ -24,6 +24,7 @@ template '/etc/sensu/conf.d/rabbitmq.json' do
     rabbitmq_password: rabbitmq_password
   )
   notifies :restart, 'service[sensu-server]', :delayed
+  notifies :restart, 'service[sensu-api]', :delayed
   notifies :restart, 'service[sensu-client]', :delayed
 end
 
@@ -34,6 +35,7 @@ template '/etc/sensu/conf.d/redis.json' do
     redis_host: redis_host
   )
   notifies :restart, 'service[sensu-server]', :delayed
+  notifies :restart, 'service[sensu-api]', :delayed
 end
 
 template '/etc/sensu/conf.d/api.json' do
@@ -43,6 +45,7 @@ template '/etc/sensu/conf.d/api.json' do
     host: api_host,
     port: api_port
   )
+  notifies :restart, 'service[sensu-server]', :delayed
   notifies :restart, 'service[sensu-api]', :delayed
 end
 
@@ -64,6 +67,7 @@ bash 'install_wizard_van' do
   EOH
   action :nothing
   notifies :restart, 'service[sensu-server]', :delayed
+  notifies :restart, 'service[sensu-api]', :delayed
 end
 
 template '/etc/sensu/conf.d/relay.json' do
@@ -72,6 +76,18 @@ template '/etc/sensu/conf.d/relay.json' do
     port: graphite_carbon_port
   )
   notifies :restart, 'service[sensu-server]', :delayed
+  notifies :restart, 'service[sensu-api]', :delayed
+end
+
+# add checks configured in attributes
+checks = node['formatron_sensu']['checks']
+checks.each do |name, params|
+  formatron_sensu_check name do
+    gem params['gem']
+    attributes params['attributes']
+  end
+  notifies :restart, 'service[sensu-server]', :delayed
+  notifies :restart, 'service[sensu-api]', :delayed
 end
 
 service 'sensu-server' do
