@@ -85,9 +85,9 @@ checks.each do |name, params|
   formatron_sensu_check name do
     gem params['gem']
     attributes params['attributes']
+    notifies :restart, 'service[sensu-server]', :delayed
+    notifies :restart, 'service[sensu-api]', :delayed
   end
-  notifies :restart, 'service[sensu-server]', :delayed
-  notifies :restart, 'service[sensu-api]', :delayed
 end
 
 service 'sensu-server' do
