@@ -13,6 +13,12 @@ action :install do
     gem_binary Sensu::BundleHelper::GEM_BINARY
   end
 
+  directory Sensu::BundleHelper::BUNDLE_GEMS_ROOT do
+    recursive true
+    owner 'sensu'
+    group 'sensu'
+  end
+
   bundle_dir = ::File.join Sensu::BundleHelper::BUNDLES_ROOT, name
   directory bundle_dir do
     recursive true
@@ -35,7 +41,7 @@ action :install do
   bash "bundle_install_#{name}" do
     code <<-EOH.gsub(/^ {6}/, '')
       rm Gemfile.lock
-      #{Sensu::BundleHelper::BUNDLE_BINARY} install --path vendor/bundle
+      #{Sensu::BundleHelper::BUNDLE_BINARY} install --path #{Sensu::BundleHelper::BUNDLE_GEMS_ROOT}
     EOH
     user 'sensu'
     group 'sensu'
