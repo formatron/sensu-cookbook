@@ -12,7 +12,7 @@ action :add do
     bundle_dir = ::File.join Sensu::BundleHelper::BUNDLES_ROOT, gem
     original_command = attributes['command'] || attributes[:command]
     fail 'Must supply command if using gem' if original_command.nil?
-    attributes['command'] = "cd #{bundle_dir} && #{Sensu::BundleHelper::RUBY_BINARY} bundle exec #{original_command}"
+    attributes['command'] = "cd #{bundle_dir} && #{Sensu::BundleHelper::BUNDLE_BINARY} exec #{original_command}"
   end
   template "/etc/sensu/conf.d/check_#{name}.json" do
     cookbook 'formatron_sensu'

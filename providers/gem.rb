@@ -30,7 +30,7 @@ action :install do
 
   bash "bundle_install_#{name}" do
     code <<-EOH.gsub(/^ {6}/, '')
-      #{Sensu::BundleHelper::RUBY_BINARY} bundle install
+      #{Sensu::BundleHelper::BUNDLE_BINARY} install --deployment
     EOH
     cwd bundle_dir
     action :nothing
