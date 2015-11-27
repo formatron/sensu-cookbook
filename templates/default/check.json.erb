@@ -1,13 +1,5 @@
 {
   "checks": {
-    "<%= @name %>": {
-      "type": "<%= @type %>",
-      "output_type": "<%= @output_type %>",
-      "auto_tag_host": "<%= @auto_tag_host %>",
-      "command": "<%= @command %>",
-      "interval": <%= @interval %>,
-      "subscribers": <%= @subscribers.to_json %>,
-      "handlers": <%= @handlers.to_json %>
-    }
+    "<%= @name %>": <%= @attributes.to_json %>
   }
 }

@@ -1,8 +1,5 @@
 {
   "handlers": {
-    "<%= @name %>": {
-      "type": "<%= @type %>",
-      "command": "<%= @command %>"
-    }
+    "<%= @name %>": <%= @attributes.to_json %>
   }
 }
