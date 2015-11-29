@@ -21,7 +21,7 @@ end
 # install gems required for the client subscriptions
 checks = node['formatron_sensu']['checks'].values
 checks.select! do |check|
-  fail check.inspect unless check['attributes']['subscribers'].kind_of? Array
+  fail check['attributes']['subscribers'].class.inspect
   !(check['gem'].nil?) &&
   !((check['attributes']['subscribers'] & client_subscriptions).empty?)
 end
