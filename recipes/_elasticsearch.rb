@@ -17,8 +17,8 @@ bash 'install_elasticsearch_handler' do
   code <<-EOH.gsub(/^ {4}/, '')
     DIR=`mktemp -d`
     tar zxf #{elasticsearch_handler_tarball} -C $DIR --strip-components=1
-    cp $DIR/elasticsearch_handler.rb /etc/sensu/extensions
-    cp $DIR/elasticsearch_metrics.rb /etc/sensu/extensions
+    cp $DIR/elasticsearch_handler.rb /etc/sensu/handlers
+    cp $DIR/elasticsearch_metrics.rb /etc/sensu/handlers
     rm -rf $DIR
   EOH
   action :nothing
