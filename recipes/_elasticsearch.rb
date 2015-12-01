@@ -35,3 +35,21 @@ template '/etc/sensu/conf.d/elasticsearch.json' do
   notifies :restart, 'service[sensu-server]', :delayed
   notifies :restart, 'service[sensu-api]', :delayed
 end
+
+formatron_sensu_handler 'elasticsearch_handler' do
+  attributes(
+    type: 'pipe',
+    command: 'elasticsearch_handler.rb'
+  )
+  notifies :restart, 'service[sensu-server]', :delayed
+  notifies :restart, 'service[sensu-api]', :delayed
+end
+
+formatron_sensu_handler 'elasticsearch_metrics' do
+  attributes(
+    type: 'pipe',
+    command: 'elasticsearch_metrics.rb'
+  )
+  notifies :restart, 'service[sensu-server]', :delayed
+  notifies :restart, 'service[sensu-api]', :delayed
+end
