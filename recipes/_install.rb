@@ -8,3 +8,7 @@ end
 package 'sensu'
 
 execute 'chown -R sensu:sensu /etc/sensu'
+
+gem_package 'sensu-plugin' do
+  gem_binary Sensu::BundleHelper::GEM_BINARY
+end
