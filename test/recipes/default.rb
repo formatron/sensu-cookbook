@@ -34,23 +34,27 @@ include_recipe 'formatron_sensu::server'
 include_recipe 'formatron_sensu::client'
 
 formatron_sensu_check 'memory' do
-  type 'metric'
-  output_type 'graphite'
-  auto_tag_host true
-  command '/etc/sensu/plugins/check-memory.sh -w 128 -c 64'
-  interval 10
-  subscribers [
-    'test'
-  ]
-  handlers [
-    'relay'
-  ]
+  attributes(
+    type: 'metric',
+    output_type: 'graphite',
+    auto_tag_host: true,
+    command: '/etc/sensu/plugins/check-memory.sh -w 128 -c 64',
+    interval: 10,
+    subscribers: [
+      'test'
+    ],
+    handlers: [
+      'relay'
+    ]
+  )
   notifies :restart, 'service[sensu-server]', :delayed
 end
 
 formatron_sensu_handler 'default' do
-  command 'cat'
-  type 'pipe'
+  attributes(
+    command: 'cat',
+    type: 'pipe'
+  )
   notifies :restart, 'service[sensu-server]', :delayed
 end
 
