@@ -28,7 +28,10 @@ node.override['formatron_sensu']['redis']['host'] = redis_host
 node.override['formatron_sensu']['client']['subscriptions'] = ['test']
 node.override['formatron_sensu']['api']['host'] = 'localhost'
 node.override['formatron_sensu']['api']['port'] = 4567
+
+include_recipe 'formatron_sensu::default'
 include_recipe 'formatron_sensu::server'
+include_recipe 'formatron_sensu::client'
 
 formatron_sensu_check 'memory' do
   type 'metric'
