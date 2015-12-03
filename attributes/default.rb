@@ -18,13 +18,6 @@ default['formatron_sensu']['wizard_van']['checksum'] = '7e7b55278f0e54c5fbdccdd2
 default['formatron_sensu']['graphite']['host'] = 'localhost'
 default['formatron_sensu']['graphite']['carbon_port'] = 2003
 
-default['formatron_sensu']['elasticsearch_handler']['commit'] = 'd71767124cf3932423fe56907a7cf3a17a13a0c1'
-default['formatron_sensu']['elasticsearch_handler']['checksum'] = 'c7adf7d46a9cd7d1aa8fa3aed75a559deef211f508297ff2cd7042b5530a247e'
-
-default['formatron_sensu']['elasticsearch']['host'] = 'localhost'
-default['formatron_sensu']['elasticsearch']['port'] = 9200
-default['formatron_sensu']['elasticsearch']['index'] = 'sensu-metrics'
-
 # checks should be a hash of checks to configure on the server
 #
 # eg:

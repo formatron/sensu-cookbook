@@ -13,7 +13,6 @@ template '/etc/sensu/conf.d/redis.json' do
 end
 
 include_recipe 'formatron_sensu::_wizardvan'
-include_recipe 'formatron_sensu::_elasticsearch'
 
 template '/etc/sensu/conf.d/api.json' do
   owner 'sensu'
