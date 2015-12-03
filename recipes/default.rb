@@ -14,11 +14,19 @@ package 'sensu'
 
 execute 'chown -R sensu:sensu /etc/sensu'
 
+# workaround so that sensu does not try to start
+# with a hostname that can't be resolved
+def resolve_address(hostname)
+  ::Resolv.getaddress hostname
+rescue
+  'localhost'
+end
+
 template '/etc/sensu/conf.d/rabbitmq.json' do
   owner 'sensu'
   group 'sensu'
   variables(
-    rabbitmq_host: rabbitmq_host,
+    rabbitmq_host: resolve_address(rabbitmq_host),
     rabbitmq_vhost: rabbitmq_vhost,
     rabbitmq_user: rabbitmq_user,
     rabbitmq_password: rabbitmq_password
